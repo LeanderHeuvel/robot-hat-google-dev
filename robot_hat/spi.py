@@ -2,7 +2,7 @@
 import spidev
 class SPI(object):
     def __init__(self, bus, device):
-        spi = spidev.SPiDev()
+        spi = spidev.SpiDev()
         spi.open(bus, device)
 
 
