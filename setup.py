@@ -103,6 +103,7 @@ def do(msg="", cmd=""):
 
 
 APT_INSTALL_LIST = [
+    "spi-dev",
     "i2c-tools",
     "espeak",
     "python3-pyaudio",
