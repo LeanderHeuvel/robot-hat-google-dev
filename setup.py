@@ -103,18 +103,18 @@ def do(msg="", cmd=""):
 
 
 APT_INSTALL_LIST = [
-    "spi-dev",
-    "i2c-tools",
-    "espeak",
-    "python3-pyaudio",
-    'libsdl2-dev',
-    'libsdl2-mixer-dev',
+    "i2c-tools", #works
+    "espeak", #works?
+    # "python3-pyaudio", # does not work
+    'libsdl2-dev', #works
+    'libsdl2-mixer-dev', # works
 ]
 
 PIP_INSTALL_LIST = [
-    "gpiozero",
-    'pillow',
-    "'pygame>=2.1.2'",
+    "spi-dev", #works
+   # "gpiozero", #does not work
+    'pillow', #works ?
+    "'pygame>=2.1.2'", #works
 ]
 
 if sys.argv[1] == 'install':
@@ -129,14 +129,14 @@ if sys.argv[1] == 'install':
         for dep in PIP_INSTALL_LIST:
             do(msg="install %s"%dep,
                 cmd='sudo pip3 install %s'%dep)
-    # Setup interfaces
-        print("Setup interfaces")
-        do(msg="turn on I2C",
-            cmd='sudo raspi-config nonint do_i2c 0')
-        do(msg="turn on SPI",
-            cmd='sudo raspi-config nonint do_spi 0')
-        do(msg="turn on Serial",
-            cmd='sudo raspi-config nonint do_serial 0')  
+    # Setup interfaces # We skip this part, since it is not required on Google Dev board.
+        # print("Setup interfaces")
+        # do(msg="turn on I2C",
+        #     cmd='sudo raspi-config nonint do_i2c 0')
+        # do(msg="turn on SPI",
+        #     cmd='sudo raspi-config nonint do_spi 0')
+        # do(msg="turn on Serial",
+        #     cmd='sudo raspi-config nonint do_serial 0')  
 
     # Report error
         if len(errors) == 0:
