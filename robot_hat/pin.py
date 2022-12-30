@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 from .basic import _Basic_class
 import RPi.GPIO as GPIO
+from periphery import GPIO as GPIO2
+
 
 class Pin(_Basic_class):
+
     OUT = GPIO.OUT
     IN = GPIO.IN
     IRQ_FALLING = GPIO.FALLING
@@ -15,7 +18,25 @@ class Pin(_Basic_class):
     _dict = {
         "BOARD_TYPE": 12,
     }
-
+    _dict_3 = {
+        "D0": ["/dev/ttymxc2",None], #UART 11
+        "D1": ["/dev/gpiochip4",10], #UART or SAI
+        "D2": ["/dev/gpiochip0",0],
+        "D3": [2, 0], #PWM
+        "D4": ["/dev/gpiochip2", 9],
+        "D5": ["/dev/gpiochip4", 10],
+        "D6": ["/dev/gpiochip4", 12],
+        "D7": [""], #UART 7
+        "D8": ["/dev/gpiochip0", 7],
+        "D9": ["/dev/gpiochip0", 8],
+        "D10": [""], #PWM 32
+        "D11": [""], #PWM 33
+        "D12": [""], ##SAI 35 Synchronous audio interface
+        "D13": ["/dev/gpiochip4", 13], #GPIO on 36
+        "D14": ["/dev/gpiochip2", 13], #37
+        "D15": [], ## SAI 38
+        "D16": [] #SAI 40
+    }
     _dict_1 = {
         "D0":  17,
         "D1":  18,
@@ -72,7 +93,7 @@ class Pin(_Basic_class):
         "BLERST": 20,
         "MCURST":  5, # Changed
     }
-
+    #value is a str type e.g. D2 and will be converted using dict
     def __init__(self, *value):
         super().__init__()
         GPIO.setmode(GPIO.BCM)
