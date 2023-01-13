@@ -111,7 +111,7 @@ APT_INSTALL_LIST = [
 ]
 
 PIP_INSTALL_LIST = [
-    "spi-dev", #works
+    "spidev", #works
    # "gpiozero", #does not work
     'pillow', #works ?
     # "'pygame>=2.1.2'", #works
