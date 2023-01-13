@@ -5,6 +5,8 @@ from periphery import GPIO
 
 '''
 Robot Hat Library adapted for Google Dev Board
+original software provided by Sunfounder
+Adapted for Dev Board by Leander 2023
 TODO: finish IRQ alternative
 
 '''
