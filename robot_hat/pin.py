@@ -21,7 +21,10 @@ class Pin(_Basic_class):
     PULL_UP = "pull_up"
     PULL_DOWN = "pull_down"
     PULL_NONE = "disable"
-
+    high_low = {
+        0:False,
+        1:True
+    }
     _dict = {
         "BOARD_TYPE": 12,
     }
@@ -175,7 +178,7 @@ class Pin(_Basic_class):
             value = value[0]
             if self._mode in [None, self.IN]:
                 self.mode(self.OUT)
-            self.gpio.write(value)
+            self.gpio.write(self.high_low[value])
             # GPIO.output(self._pin, value)
             return value
 
