@@ -3,6 +3,11 @@ from .basic import _Basic_class
 # import RPi.GPIO as GPIO
 from periphery import GPIO
 
+'''
+Robot Hat Library adapted for Google Dev Board
+TODO: finish IRQ alternative
+
+'''
 
 class Pin(_Basic_class):
 
@@ -160,14 +165,16 @@ class Pin(_Basic_class):
             if self._mode in [None, self.OUT]:
                 #assure that mode is set to reading when value() without arguments in the constructor is called
                 self.mode(self.IN)
-            result = GPIO.input(self._pin)
+            result = self.gpio.read()
+            # result = GPIO.input(self._pin)
             self._debug("read pin %s: %s" % (self._pin, result))
             return result
         else:
             value = value[0]
             if self._mode in [None, self.IN]:
                 self.mode(self.OUT)
-            GPIO.output(self._pin, value)
+            self.gpio.write(value)
+            # GPIO.output(self._pin, value)
             return value
 
     def on(self):
@@ -200,7 +207,8 @@ class Pin(_Basic_class):
 
     def irq(self, handler=None, trigger=None, bouncetime=200):
         self.mode(self.IN)
-        GPIO.add_event_detect(self._pin, trigger, callback=handler, bouncetime=bouncetime)
+        #not implemented yet, periphery has not an out-of-the-box working alternative for creating callbacks on events
+        # GPIO.add_event_detect(self._pin, trigger, callback=handler, bouncetime=bouncetime)
 
     def name(self):
         return "GPIO%s"%self._pin
