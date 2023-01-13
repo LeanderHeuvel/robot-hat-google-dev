@@ -114,7 +114,7 @@ PIP_INSTALL_LIST = [
     "spi-dev", #works
    # "gpiozero", #does not work
     'pillow', #works ?
-    "'pygame>=2.1.2'", #works
+    # "'pygame>=2.1.2'", #works
 ]
 
 if sys.argv[1] == 'install':
