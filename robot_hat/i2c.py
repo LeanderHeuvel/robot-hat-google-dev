@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from .basic import _Basic_class
-from smbus2 import SMBus
+from smbus import SMBus
 
 def _retry_wrapper(func):
     def wrapper(self, *arg, **kwargs):
