@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import smbus, math
+import math
+import smbus2 as smbus
 from .i2c import I2C
 
 timer = [

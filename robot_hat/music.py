@@ -2,7 +2,7 @@
 from .basic import _Basic_class
 import time
 import threading
-import pyaudio
+# import pyaudio
 import numpy as np
 
 class Music(_Basic_class):

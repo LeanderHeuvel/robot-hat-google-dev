@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 from .basic import _Basic_class
-import RPi.GPIO as GPIO
-from periphery import GPIO as GPIO2
+# import RPi.GPIO as GPIO
+from periphery import GPIO
 
 
 class Pin(_Basic_class):
 
-    OUT = GPIO.OUT
-    IN = GPIO.IN
-    IRQ_FALLING = GPIO.FALLING
-    IRQ_RISING = GPIO.RISING
-    IRQ_RISING_FALLING = GPIO.BOTH
-    PULL_UP = GPIO.PUD_UP
-    PULL_DOWN = GPIO.PUD_DOWN
-    PULL_NONE = None
+    OUT = "out"
+    IN = "in"
+    IRQ_FALLING = "falling"
+    IRQ_RISING = "rising"
+    IRQ_RISING_FALLING = "both"
+    PULL_UP = "pull_up"
+    PULL_DOWN = "pull_down"
+    PULL_NONE = "disable"
 
     _dict = {
         "BOARD_TYPE": 12,
@@ -96,15 +96,17 @@ class Pin(_Basic_class):
     #value is a str type e.g. D2 and will be converted using dict
     def __init__(self, *value):
         super().__init__()
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setwarnings(False)
-
+        # GPIO.setmode(GPIO.BCM)
+        # GPIO.setwarnings(False)
+        self.gpio = None
         self.check_board_type()
-
+        print(value)
         if len(value) > 0:
             pin = value[0]
+            print("Pin: ",pin)
         if len(value) > 1:
             mode = value[1]
+            print("mode: ",mode)
         else:
             mode = None
         if len(value) > 2:
@@ -127,21 +129,18 @@ class Pin(_Basic_class):
         self._info("Pin init finished.")
         
     def check_board_type(self):
-        type_pin = self.dict()["BOARD_TYPE"]
-        GPIO.setup(type_pin, GPIO.IN)
-        if GPIO.input(type_pin) == 0:
-            self._dict = self._dict_1
-        else:
-            self._dict = self._dict_2
+        self._dict = self._dict_3
 
-    def init(self, mode, pull=PULL_NONE):
+    def init(self, mode, pull=None):
         self._pull = pull
         self._mode = mode
         if mode != None:
             if pull != None:
-                GPIO.setup(self._pin, mode, pull_up_down=pull)
+                self.gpio = GPIO(self._pin[0], self._pin[1], bias = pull)
+                # GPIO.setup(self._pin, mode, pull_up_down=pull)
             else:
-                GPIO.setup(self._pin, mode)
+                self.gpio = GPIO(self._pin[0], self._pin[1], mode)
+                # GPIO.setup(self._pin, mode)
 
     def dict(self, *_dict):
         if len(_dict) == 0:
@@ -159,6 +158,7 @@ class Pin(_Basic_class):
     def value(self, *value):
         if len(value) == 0:
             if self._mode in [None, self.OUT]:
+                #assure that mode is set to reading when value() without arguments in the constructor is called
                 self.mode(self.IN)
             result = GPIO.input(self._pin)
             self._debug("read pin %s: %s" % (self._pin, result))
@@ -188,10 +188,12 @@ class Pin(_Basic_class):
         else:
             self._mode = value[0]
             if len(value) == 1:
-                GPIO.setup(self._pin, self._mode)
+                self.gpio = GPIO(self._pin[0], self._pin[1], self._mode)
+                # GPIO.setup(self._pin, self._mode)
             elif len(value) == 2:
                 self._pull = value[1]
-                GPIO.setup(self._pin, self._mode, self._pull)
+                self.gpio = GPIO(self._pin[0], self._pin[1], self._mode, bias = self._pull) #pull functionality not implemented yet
+                # GPIO.setup(self._pin, self._mode, self._pull)
 
     def pull(self, *value):
         return self._pull
