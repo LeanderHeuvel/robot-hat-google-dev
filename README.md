@@ -15,15 +15,6 @@ Quick Links:
   - [License](#license)
   - [Contact us](#contact-us)
 
-## About Robot Hat
-
-TODO
-
-## Update
-
-2021-07-05:
-
-- New Release
 
 ## Installation
 
