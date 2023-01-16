@@ -1,6 +1,8 @@
 # Robot Hat
 
-Robot Hat Python library for Raspberry Pi.
+Robot Hat Python library for ~~Raspberry Pi~~ Google Dev Board. 
+
+The repository is currently under construction. 
 
 Quick Links:
 
