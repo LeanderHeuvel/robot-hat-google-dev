@@ -4,6 +4,10 @@ Robot Hat Python library for ~~Raspberry Pi~~ Google Dev Board.
 
 The repository is currently under construction. The main adaptation currenlty involves the replacement of the GPIO library by periphery. Periphery is compatible with Google Dev Board and therefore required to operate the Picar-X.
 
+## TODO
+ - Create overview of pins that need to be connected in order for the the Dev Board to control the Picar. The Dev Board has a slightly different GPIO layout. Therefore, different pins should be used. 
+ - Test and debug 
+
 Quick Links:
 
 - [Robot Hat](#robot-hat)
@@ -14,6 +18,7 @@ Quick Links:
   - [About SunFounder](#about-sunfounder)
   - [License](#license)
   - [Contact us](#contact-us)
+
 
 
 ## Installation
